@@ -19,6 +19,9 @@ class Filme(models.Model):
     visualizações = models.IntegerField(default=0)
     data_criacao = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return self.titulo
+
 # Criar o episódio
 
 # Criar o usuário
