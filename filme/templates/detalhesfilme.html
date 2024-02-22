@@ -19,6 +19,15 @@ HomeFilmes Hashflix
     </a>
     {% endfor %}
 
+    <div class="py-10">
+        <h2>Filmes Relacionados</h2>
+        {% for filme in filmes_relacionados %}
+        <p>
+            <a href="{% url 'app_filme:detalhesfilme' filme.pk %}">{{ filme.titulo }}</a>
+        </p>
+        {% endfor %}
+    </div>
+
 </div>
 
 {% endblock %}
