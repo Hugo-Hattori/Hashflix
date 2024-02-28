@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'filme.novos_context.lista_filmes_recente',
                 'filme.novos_context.lista_filmes_emAlta',
+                'filme.novos_context.filme_destaque',
             ],
         },
     },
