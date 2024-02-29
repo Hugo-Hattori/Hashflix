@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -34,3 +35,5 @@ class Episodio(models.Model):
 
 
 # Criar o usuário
+class Usuario(AbstractUser):
+    filmes_vistos = models.ManyToManyField("Filme")
