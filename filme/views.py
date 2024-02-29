@@ -23,7 +23,11 @@ class Detalhesfilme(DetailView):
         # contabilizando uma visualização
         filme = self.get_object() # descobrir qual filme está acessando
         filme.visualizações += 1 # somar 1 nas visualizações daquele filme
-        filme.save() # salvar
+        filme.save()
+
+        # adicionando o objeto 'filme' no campo 'filmes_vistos' do usuário logado
+        usuario = request.user
+        usuario.filmes_vistos.add(filme)
         return super().get(request, *args, **kwargs) # redireciona user para url desejada
 
     def get_context_data(self, **kwargs):
