@@ -15,3 +15,7 @@ class CriarContaForm(UserCreationForm):
         if Usuario.objects.filter(email=email).exists():
             raise forms.ValidationError("Este e-mail já está cadastrado em outra conta! Por favor, utilize outro endereço de e-mail.")
         return email
+
+
+class FormHomepage(forms.Form):
+    email = forms.EmailField(label=False)
