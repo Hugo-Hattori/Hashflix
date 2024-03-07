@@ -3,6 +3,7 @@ from .models import Filme, Usuario
 from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CriarContaForm, FormHomepage
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -75,6 +76,18 @@ class PaginaPerfil(LoginRequiredMixin, UpdateView):
     template_name = 'editarperfil.html'
     model = Usuario
     fields = ['first_name', 'last_name', 'email']
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            if self.request.user.id != self.kwargs['pk']:
+                return self.redirecionar_proprio_perfil()
+        else:
+            return HttpResponseRedirect(reverse('app_filme:login'))
+        return super().dispatch(request, *args, **kwargs)
+
+    def redirecionar_proprio_perfil(self):
+        proprio_perfil_url = reverse('app_filme:editarperfil', kwargs={'pk': self.request.user.id})
+        return HttpResponseRedirect(proprio_perfil_url)
 
     def get_success_url(self):
         return reverse('app_filme:homefilmes')
