@@ -13,5 +13,5 @@ class FilmeConfig(AppConfig):
         senha = os.getenv("SENHA_ADMIN")
 
         usuarios = Usuario.objects.filter(email=email)
-        if not usuarios:
-            Usuario.objects.create_superuser(username="admin2", email=email, password=senha, is_active=True, is_staff=True)
+        # if not usuarios:
+        #     Usuario.objects.create_superuser(username="admin2", email=email, password=senha, is_active=True, is_staff=True)
