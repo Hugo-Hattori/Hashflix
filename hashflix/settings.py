@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h%tu#+^-*)7caj21sric7x)39m^ro3wbr=83lpfeic-9pfi@iy'
+TOKEN_CSRF = os.getenv('TOKEN_CSRF')
+
+if TOKEN_CSRF:
+    SECRET_KEY = TOKEN_CSRF
+    CSRF_TRUSTED_ORIGINS = ['https://hashflix-production-c1fa.up.railway.app'] #limitando infos de forms enviados apenas por este domínio
+else:
+    SECRET_KEY = 'django-insecure-h%tu#+^-*)7caj21sric7x)39m^ro3wbr=83lpfeic-9pfi@iy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://hashflix-production-c1fa.up.railway.app", "localhost", '127.0.0.1']
 
 
 # Application definition
@@ -88,7 +95,6 @@ DATABASES = {
 }
 
 import dj_database_url
-import os
 
 DATABASE_URL = 'postgresql://postgres:uYFlgWAiUOwoojxgrngHYJcfwxWfWpEK@viaduct.proxy.rlwy.net:33766/railway'
 
