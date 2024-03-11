@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-TOKEN_CSRF = os.getenv('TOKEN_CSRF')
+TOKEN_CSRF = 'e2a83884193a181c05029af0919808d4104fca3840a9fb39'
 
 if TOKEN_CSRF:
     SECRET_KEY = TOKEN_CSRF
